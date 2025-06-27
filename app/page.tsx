@@ -1,6 +1,5 @@
 "use client";
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -43,13 +42,16 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
       <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-4 text-center">뉴스 클리핑 구독</h1>
+        <h1 className="text-3xl font-bold mb-6 text-center">📧 News Clipping</h1>
+
         {submitted ? (
-          <div className="text-green-600 text-center">구독이 완료되었습니다!</div>
+          <div className="text-green-600 text-center text-lg font-semibold">
+            구독이 완료되었습니다!
+          </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block mb-1 font-medium">이메일 주소</label>
+              <label className="block mb-2 font-medium">이메일 주소</label>
               <input
                 type="email"
                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
@@ -58,13 +60,26 @@ export default function Home() {
                 required
               />
             </div>
+
             <div>
-              <label className="block mb-1 font-medium">키워드 (여러 개 입력 후 Enter)</label>
+              <label className="block mb-2 font-medium">
+                키워드{" "}
+                <span className="text-sm text-gray-500">
+                  (키워드 입력 후 Enter 키를 눌러 추가하세요)
+                </span>
+              </label>
               <div className="flex flex-wrap gap-2 mb-2">
                 {keywords.map((kw) => (
-                  <span key={kw} className="bg-blue-100 text-blue-700 px-2 py-1 rounded-full flex items-center">
+                  <span
+                    key={kw}
+                    className="bg-blue-100 text-blue-700 px-2 py-1 rounded-full flex items-center"
+                  >
                     {kw}
-                    <button type="button" className="ml-1 text-xs" onClick={() => removeKeyword(kw)}>
+                    <button
+                      type="button"
+                      className="ml-1 text-xs"
+                      onClick={() => removeKeyword(kw)}
+                    >
                       ×
                     </button>
                   </span>
@@ -81,9 +96,10 @@ export default function Home() {
                     addKeyword();
                   }
                 }}
-                placeholder="키워드를 입력하고 Enter를 누르세요"
+                placeholder="예: AI, 보안, SaaS 등 입력 후 Enter"
               />
             </div>
+
             <button
               type="submit"
               className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
@@ -91,10 +107,11 @@ export default function Home() {
             >
               {loading ? "구독 중..." : "구독하기"}
             </button>
+
             {error && <div className="text-red-600 text-center">{error}</div>}
           </form>
         )}
       </div>
     </main>
   );
-} 
+}
