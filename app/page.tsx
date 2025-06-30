@@ -40,35 +40,29 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-white px-4 py-8 relative">
-      <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
-        <h1 className="text-3xl font-bold mb-2 text-black">News Clipping</h1>
-        <p className="text-sm text-gray-700 mb-6">
+    <main className="min-h-screen bg-gray-50 flex items-center justify-center relative px-4">
+      <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
+        <h1 className="text-3xl font-bold mb-2 text-center">News Clipping</h1>
+        <p className="text-center text-gray-700 mb-6 text-sm">
           📧 매일 아침 9시, 원하는 키워드의 뉴스를 이메일로 받아보세요 :)
         </p>
 
         {submitted ? (
           <div className="text-green-600 text-center">구독이 완료되었습니다!</div>
         ) : (
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <div className="flex flex-col">
-              <label htmlFor="email" className="mb-1 font-medium">
-                이메일 주소
-              </label>
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label className="block mb-2 font-medium">이메일 주소</label>
               <input
                 type="email"
-                id="email"
-                className="border px-3 py-2 rounded"
+                className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
-
-            <div className="flex flex-col">
-              <label htmlFor="keyword" className="mb-1 font-medium">
-                키워드
-              </label>
+            <div>
+              <label className="block mb-2 font-medium">키워드</label>
               <div className="flex flex-wrap gap-2 mb-2">
                 {keywords.map((kw) => (
                   <span
@@ -88,8 +82,7 @@ export default function Home() {
               </div>
               <input
                 type="text"
-                id="keyword"
-                className="border px-3 py-2 rounded"
+                className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
                 onKeyDown={(e) => {
@@ -101,21 +94,19 @@ export default function Home() {
                 placeholder="예: AI, 보안 등 키워드를 콤마로 구분하여 입력해주세요."
               />
             </div>
-
             <button
               type="submit"
+              className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
               disabled={loading || !email || keywords.length === 0}
-              className="bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
             >
               {loading ? "구독 중..." : "구독하기"}
             </button>
-
-            {error && <p className="text-red-600 text-center text-sm">{error}</p>}
+            {error && <div className="text-red-600 text-center">{error}</div>}
           </form>
         )}
       </div>
 
-      <footer className="absolute bottom-2 left-4 text-xs text-gray-400">
+      <footer className="absolute bottom-2 right-4 text-xs text-gray-400">
         Designed by youmin
       </footer>
     </main>
