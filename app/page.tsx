@@ -40,14 +40,15 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
+    <main className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4 relative">
       <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
-        <h1 className="text-3xl font-bold mb-6 text-center">📧 News Clipping</h1>
+        <h1 className="text-3xl font-bold mb-2 text-center">News Clipping</h1>
+        <p className="text-center text-gray-700 mb-6 text-sm">
+          📧 매일 아침 9시, 원하는 키워드의 뉴스를 이메일로 받아보세요 :)
+        </p>
 
         {submitted ? (
-          <div className="text-green-600 text-center text-lg font-semibold">
-            구독이 완료되었습니다!
-          </div>
+          <div className="text-green-600 text-center">구독이 완료되었습니다!</div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
@@ -60,14 +61,8 @@ export default function Home() {
                 required
               />
             </div>
-
             <div>
-              <label className="block mb-2 font-medium">
-                키워드{" "}
-                <span className="text-sm text-gray-500">
-                  (키워드 입력 후 Enter 키를 눌러 추가하세요)
-                </span>
-              </label>
+              <label className="block mb-2 font-medium">키워드</label>
               <div className="flex flex-wrap gap-2 mb-2">
                 {keywords.map((kw) => (
                   <span
@@ -96,10 +91,9 @@ export default function Home() {
                     addKeyword();
                   }
                 }}
-                placeholder="예: AI, 보안, SaaS 등 입력 후 Enter"
+                placeholder="예: AI, 보안 등 키워드를 콤마로 구분하여 입력해주세요."
               />
             </div>
-
             <button
               type="submit"
               className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
@@ -107,11 +101,14 @@ export default function Home() {
             >
               {loading ? "구독 중..." : "구독하기"}
             </button>
-
             {error && <div className="text-red-600 text-center">{error}</div>}
           </form>
         )}
       </div>
+
+      <footer className="absolute bottom-2 left-2 text-xs text-gray-400">
+        Designed by youmin
+      </footer>
     </main>
   );
 }
