@@ -91,7 +91,7 @@ export default function Home() {
                     addKeyword();
                   }
                 }}
-                placeholder="예: AI, 보안 등 키워드를 콤마로 구분하여 입력해주세요."
+                placeholder="키워드를 하나씩 입력 후 엔터를 누르세요."
               />
             </div>
             <button
