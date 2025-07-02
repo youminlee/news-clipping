@@ -40,85 +40,77 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-12">
-      <div className="bg-white rounded-xl shadow-xl p-10 w-full max-w-xl space-y-6">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">News Clipping</h1>
-          <p className="text-gray-600 text-sm">
-            📧 매일 아침 9시, 원하는 키워드의 뉴스를 이메일로 받아보세요 :)
-          </p>
-        </div>
-
-        {submitted ? (
-          <div className="text-center text-green-600 text-lg font-medium py-10">
-            🎉 구독이 완료되었습니다!
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label className="block mb-2 text-sm font-medium text-gray-700">
-                이메일 주소
-              </label>
-              <input
-                type="email"
-                className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block mb-2 text-sm font-medium text-gray-700">
-                키워드
-              </label>
-              <div className="flex flex-wrap gap-2 mb-2">
-                {keywords.map((kw) => (
-                  <span
-                    key={kw}
-                    className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm flex items-center"
-                  >
-                    {kw}
-                    <button
-                      type="button"
-                      className="ml-2 text-xs text-blue-500 hover:text-blue-700"
-                      onClick={() => removeKeyword(kw)}
-                    >
-                      ×
-                    </button>
-                  </span>
-                ))}
-              </div>
-              <input
-                type="text"
-                className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                value={keyword}
-                onChange={(e) => setKeyword(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    addKeyword();
-                  }
-                }}
-                placeholder="키워드를 하나씩 입력 후 엔터를 누르세요."
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-200 font-semibold"
-              disabled={loading || !email || keywords.length === 0}
-            >
-              {loading ? "구독 중..." : "구독하기"}
-            </button>
-            {error && <div className="text-red-600 text-center text-sm">{error}</div>}
-          </form>
-        )}
+    <main className="w-full max-w-xl bg-white rounded-lg shadow-lg p-10 space-y-6">
+      <div className="text-center">
+        <h1 className="text-3xl font-bold mb-2">News Clipping</h1>
+        <p className="text-gray-600 text-sm">
+          📧 매일 점심시간에, 원하는 키워드의 뉴스를 이메일로 받아보세요
+        </p>
       </div>
 
-      <footer className="absolute bottom-6 right-6 text-xs text-gray-400">
-        Designed by youmin
-      </footer>
+      {submitted ? (
+        <div className="text-center text-green-600 text-lg py-10">
+          🎉 구독이 완료되었습니다!
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label className="block mb-2 text-sm font-medium text-gray-700">이메일 주소</label>
+            <input
+              type="email"
+              className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block mb-2 text-sm font-medium text-gray-700">키워드</label>
+            <div className="flex flex-wrap gap-2 mb-2">
+              {keywords.map((kw) => (
+                <span
+                  key={kw}
+                  className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm flex items-center"
+                >
+                  {kw}
+                  <button
+                    type="button"
+                    className="ml-2 text-xs text-blue-500 hover:text-blue-700"
+                    onClick={() => removeKeyword(kw)}
+                  >
+                    ×
+                  </button>
+                </span>
+              ))}
+            </div>
+            <input
+              type="text"
+              className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  addKeyword();
+                }
+              }}
+              placeholder="키워드 입력 후 엔터를 누르세요."
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-200 font-semibold"
+            disabled={loading || !email || keywords.length === 0}
+          >
+            {loading ? "구독 중..." : "구독하기"}
+          </button>
+          {error && <div className="text-red-600 text-center text-sm">{error}</div>}
+        </form>
+      )}
+
+      <footer className="text-xs text-gray-400 text-right mt-8">Designed by youmin</footer>
     </main>
   );
 }
