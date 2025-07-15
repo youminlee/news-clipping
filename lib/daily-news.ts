@@ -1,5 +1,6 @@
+import { filterDuplicateNews } from "../utils/filterDuplicates";
 import { createClient } from "@supabase/supabase-js";
-import { fetchNewsArticles } from "./crawler";
+import { fetchNewsArticles, NewsArticle } from "./crawler";
 import { summarize } from "./summarizer";
 import { buildNewsletterEmail } from "./emailBuilder";
 import { sendEmail } from "./sendEmail";
@@ -18,9 +19,11 @@ async function main() {
     const keywordArticles: Record<string, any[]> = {};
     for (const keyword of user.keywords) {
       const articles = await fetchNewsArticles(keyword);
+      const deduped = filterDuplicateNews(articles);
+
       // Summarize each article
       const summarized = await Promise.all(
-        articles.map(async (a) => ({
+        deduped.map(async (a: NewsArticle) => ({
           ...a,
           description: await summarize(a.description),
         }))
