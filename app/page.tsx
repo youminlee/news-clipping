@@ -45,7 +45,7 @@ export default function Home() {
     <div className="full-wrapper">
       <div className="card">
         <h1>News Clipping</h1>
-        <p className="subtitle">📧 매일 점심, 키워드 뉴스 받아보세요</p>
+        <p className="subtitle">📧 매일 오전, 키워드 뉴스 받아보세요</p>
 
         {submitted ? (
           <div className="success">🎉 구독이 완료되었습니다!</div>
